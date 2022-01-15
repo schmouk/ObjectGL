@@ -3,7 +3,6 @@ archive
 Debug
 x64
 .vs
-ObjectGL/ObjectGL.*
 
 # Prerequisites
 *.d
