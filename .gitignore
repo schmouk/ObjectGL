@@ -2,7 +2,7 @@
 archive
 Debug
 x64
-.gitignore
+.vs
 
 # Prerequisites
 *.d
