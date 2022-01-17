@@ -35,18 +35,24 @@ using namespace std;
 
 bool Shader::compile()
 {
-	GLint result;
-	glCompileShader(name);
-	glGetShaderiv(name, GL_COMPILE_STATUS, &result);
-	return result == GL_TRUE;
+	if (!compiled) {
+		GLint ok;
+		glCompileShader(name);
+		glGetShaderiv(name, GL_COMPILE_STATUS, &ok);
+		compiled = (ok == GL_TRUE);
+	}
+	return compiled;
 }
 
 
-string& Shader::get_compile_log(const GLsizei max_length = 1024)
+void Shader::get_compile_log(string& info_log, const GLsizei max_length)
 {
-	string infoLog(max_length, (char)0);
-	glGetShaderInfoLog(name, max_length-1, NULL, &infoLog.front());
-	return infoLog;
+	if (compiled)
+		info_log.clear();
+	else {
+		info_log.reserve(max_length);
+		glGetShaderInfoLog(name, max_length - 1, NULL, &info_log.front());
+	}
 }
 
 

@@ -38,6 +38,8 @@ using namespace std;
 class Shader : public SharableObject {
 public:
 
+    bool compiled; //< the compilation status of this shader.
+
     /** \brief Empty constructor.
     * 
     * Creates an OpenGL shader object according to its type  and 
@@ -60,7 +62,7 @@ public:
     *       GL_TESS_EVALUATION_SHADER, GL_TESS_CONTROL_SHADER.
     */
     Shader(GLenum type)
-        : SharableObject( glCreateShader(type) )
+        : SharableObject(glCreateShader(type)), compiled(false)
     {}
 
     /** \brief Constructor with source code setting from file.
@@ -89,7 +91,7 @@ public:
     * \sa set_source_code.
     */
     Shader(GLenum type, const string& filepath)
-        : SharableObject(glCreateShader(type))
+        : SharableObject(glCreateShader(type)), compiled(false)
     {
         load_source_code(filepath);
     }
@@ -121,10 +123,11 @@ public:
     * \sa set_source_code.
     */
     Shader(GLenum type, const char* filepath)
-        : SharableObject(glCreateShader(type))
+        : SharableObject(glCreateShader(type)), compiled(false)
     {
         load_source_code(filepath);
     }
+
 
     /** \brief Copy constructor is not allowed on shaders.
     */
@@ -155,6 +158,9 @@ public:
 
     /** \brief Provides compilation logs.
     * 
+    * \param info_log : a reference to  the  string  which  will
+    *       finally  contain the logs of the last compilation of
+    *       this shader.
     * \param max_size : the  maximum  length  accepted  for  the
     *       returned logs string, including the terminating NULL
     *       character. Defaults to 1024 chars.
@@ -163,8 +169,20 @@ public:
     *       ation error logs.  This string is empty when compil-
     *       ing completed with no error.
     */
-    string& get_compile_log(const GLsizei max_length = 1024);
+    void get_compile_log(string &info_log, const GLsizei max_length = 1024);
 
+
+    /** Class method. Tests for the Shader-ness of a name.
+    * 
+    * \param name : the OpenGL identifier of an object to test
+    *       against OpenGL Shader Objects identifiers.
+    * 
+    * \ return True if the 'name' (i.e. the GLuint) argument is
+    *       the OpenGL identifier of a shader, or false else.
+    */
+    static bool is_shader(const GLuint name) {
+        return glIsShader(name);
+    }
 
     /** \brief Loads from file the source code of this shader.
     * 
@@ -177,7 +195,12 @@ public:
     * \return true if loading was ok, or false else.
     */
     bool load_source_code(const string& filepath) {
-        return load_source_code(filepath.c_str());
+        if (load_source_code(filepath.c_str())) {
+            compiled = false;
+            return true;
+        }
+        else
+            return false;
     }
 
 
@@ -195,6 +218,16 @@ public:
     bool load_source_code(const char* filepath);
 
 
+    /** \brief Prepares the further deletion of this shader within the OpenGL context.
+    *
+    * Notice: this is not  the  same  action  as  deleting  this
+    * shader object within the application environment.
+    */
+    void prepare_delete() {
+        glDeleteShader(name);
+    }
+
+
     /** \brief Sets the source code of this shader.
     * 
     * Sets the source code of this shader.
@@ -205,6 +238,7 @@ public:
     */
     void set_source_code(const string& source_code) {
         glShaderSource(name, 1, (const GLchar *const *)source_code.c_str(), NULL);
+        compiled = false;
     }
 
 

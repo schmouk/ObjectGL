@@ -125,6 +125,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(ProjectDir)\OpenGL\glew-2.1.0\lib\Release\x64\glew32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,6 +143,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(ProjectDir)\OpenGL\glew-2.1.0\lib\Release\x64\glew32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -151,6 +153,7 @@
     <ClInclude Include="include\shaders\fragment_shader.h" />
     <ClInclude Include="include\shaders\geometry_shader.h" />
     <ClInclude Include="include\shaders\shaders.h" />
+    <ClInclude Include="include\shaders\shaders_program.h" />
     <ClInclude Include="include\shaders\tessellation_control_shader.h" />
     <ClInclude Include="include\shaders\tessellation_evaluation_shader.h" />
     <ClInclude Include="include\shaders\vertex_shader.h" />
@@ -158,6 +161,8 @@
   <ItemGroup>
     <ClCompile Include="src\queries\query.cpp" />
     <ClCompile Include="src\shaders\shaders.cpp" />
+    <ClCompile Include="src\shaders\shader_program.cpp" />
+    <ClCompile Include="src\tests\tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
