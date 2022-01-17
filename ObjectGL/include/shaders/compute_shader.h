@@ -34,8 +34,34 @@ SOFTWARE.
 class ComputeShader : public Shader {
 public:
 
-	ComputeShader(const GLuint name = 0)
-		: Shader(name)
+	/** \brief Empty constructor.
+	*
+	* Creates an OpenGL Compute Shader object and  associates  a 
+	* GLuint identifier to it. Once created, this identifier can
+	* be further accessed directly via attribute '.name'.
+	*
+	* Notice: in case of any type of error at creation time, the
+	*		  associated identifier is 0.
+	*/
+	ComputeShader()
+		: Shader(GL_COMPUTE_SHADER)
+	{}
+
+	/** \brief Constructor with source code setting.
+	*
+	* Creates an OpenGL Compute Shader object and  associates  a
+	* GLuint identifier to it. Once created, this identifier can
+	* be  further accessed directly via attribute '.name'.  Sets 
+	* also the source code for this shader object.
+	*
+	* Notice: in case of any type of error at creation time, the
+	*		  associated identifier is 0.
+	*
+	* \param source_code : a NULL-terminated  string  containing
+	*		the whole source code of this shader.
+	*/
+	ComputeShader(const GLchar* source_code)
+		: Shader(GL_COMPUTE_SHADER, source_code)
 	{}
 
 	~ComputeShader()

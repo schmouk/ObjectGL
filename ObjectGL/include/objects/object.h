@@ -32,18 +32,20 @@ SOFTWARE.
 */
 class Object {
 public:
-	GLuint m_name;
+	GLuint name;
 	static const bool m_sharable = false;
 
 	Object(const GLuint name = 0)
-		:m_name(name)
+		:name(name)
 	{}
+
+	Object(const Object& copy) = delete; // this is to avoid copy constructor
 
 	~Object()
 	{}
 
 	inline const bool is_ok() const {
-		return m_name != 0;
+		return name != 0;
 	}
 };
 

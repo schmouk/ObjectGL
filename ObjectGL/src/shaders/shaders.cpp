@@ -1,4 +1,3 @@
-#pragma once
 /**
 MIT License
 
@@ -24,46 +23,64 @@ SOFTWARE.
 */
 
 //===========================================================================
-#include "GL/glew.h"
+#include <cstddef>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 #include "shaders/shaders.h"
 
+using namespace std;
 
-//===========================================================================
-/** The class of OpenGL Geometry Shader.
-*/
-class GeometryShader : public Shader {
-public:
 
-	/** \brief Empty constructor.
-	*
-	* Creates an OpenGL Geometry Shader object and associates  a
-	* GLuint identifier to it. Once created, this identifier can
-	* be further accessed directly via attribute '.name'.
-	*
-	* Notice: in case of any type of error at creation time, the
-	*		  associated identifier is 0.
-	*/
-	GeometryShader()
-		: Shader(GL_GEOMETRY_SHADER)
-	{}
+bool Shader::compile()
+{
+	GLint result;
+	glCompileShader(name);
+	glGetShaderiv(name, GL_COMPILE_STATUS, &result);
+	return result == GL_TRUE;
+}
 
-	/** \brief Constructor with source code setting.
-	*
-	* Creates an OpenGL Geometry Shader object and associates  a
-	* GLuint identifier to it. Once created, this identifier can
-	* be  further accessed directly via attribute '.name'.  Sets
-	* also the source code for this shader object.
-	*
-	* Notice: in case of any type of error at creation time, the
-	*		  associated identifier is 0.
-	*
-	* \param source_code : a NULL-terminated  string  containing
-	*		the whole source code of this shader.
-	*/
-	GeometryShader(const GLchar* source_code)
-		: Shader(GL_GEOMETRY_SHADER, source_code)
-	{}
 
-	~GeometryShader()
-	{}
-};
+string& Shader::get_compile_log(const GLsizei max_length = 1024)
+{
+	string infoLog(max_length, (char)0);
+	glGetShaderInfoLog(name, max_length-1, NULL, &infoLog.front());
+	return infoLog;
+}
+
+
+bool Shader::load_source_code(const char* filepath)
+{
+	try {
+		ifstream in_stream(filepath);
+
+		ostringstream source_code;
+		source_code << in_stream.rdbuf();
+		in_stream.close();
+
+		set_source_code(source_code.str());
+
+		return true;
+	}
+	catch (ifstream::failure& e) {
+		cerr << "!!! " << e.what() << endl;
+		return false;
+	}
+}
+
+
+void Shader::old_source_code_to_string(
+		GLsizei count,
+		const GLchar** strings,
+		const GLint* lengths,
+		string& out_source_code)
+{
+	for (int i = 0; i < count; ++i)
+		if (lengths == NULL || lengths[i] < 0)
+			// the current source line is NULL-terminated
+			out_source_code += strings[i];
+		else
+			// the current source line is NOT NULL-terminated
+			out_source_code += string(strings[i], size_t(lengths[i]));
+}

@@ -147,10 +147,17 @@
   <ItemGroup>
     <ClInclude Include="include\objects\object.h" />
     <ClInclude Include="include\queries\query.h" />
+    <ClInclude Include="include\shaders\compute_shader.h" />
+    <ClInclude Include="include\shaders\fragment_shader.h" />
+    <ClInclude Include="include\shaders\geometry_shader.h" />
     <ClInclude Include="include\shaders\shaders.h" />
+    <ClInclude Include="include\shaders\tessellation_control_shader.h" />
+    <ClInclude Include="include\shaders\tessellation_evaluation_shader.h" />
+    <ClInclude Include="include\shaders\vertex_shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\queries\query.cpp" />
+    <ClCompile Include="src\shaders\shaders.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
