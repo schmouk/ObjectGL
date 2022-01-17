@@ -130,4 +130,3 @@ void ShadersProgram::get_linking_log(string& info_log, const GLsizei max_length)
         glGetProgramInfoLog(name, max_length - 1, NULL, &info_log.front());
     }
 }
-
