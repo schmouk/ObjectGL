@@ -29,7 +29,7 @@ SOFTWARE.
 #include "GL/glew.h"
 
 #include "objects/object.h"
-#include "shaders/shaders.h"
+#include "shaders.h"
 
 
 //===========================================================================
@@ -42,7 +42,7 @@ typedef vector<Shader*> ShadersList; //< the type for lists of shaders.
 class ShadersProgram : public Object {
 public:
 
-    bool linked; //< the linking step status of this shaders program.
+    bool linked; //!< the linking step status of this shaders program.
 
 
     /** \brief Empty constructor.
@@ -272,6 +272,6 @@ public:
 
 
 private:
-    ShadersList prvt_attached_shaders;
+    ShadersList prvt_attached_shaders;  // the list of shaders that are currently attached to this program.
 
 };

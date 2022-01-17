@@ -27,7 +27,7 @@ SOFTWARE.
 #include <cstddef>
 #include <string>
 #include "GL/glew.h"
-#include "objects/object.h"
+#include "../objects/object.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ using namespace std;
 class Shader : public SharableObject {
 public:
 
-    bool compiled; //< the compilation status of this shader.
+    bool compiled; //!< the compilation status of this shader.
 
     /** \brief Empty constructor.
     * 
