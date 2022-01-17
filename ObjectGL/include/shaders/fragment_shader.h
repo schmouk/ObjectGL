@@ -25,42 +25,45 @@ SOFTWARE.
 
 //===========================================================================
 #include "GL/glew.h"
+#include "shaders.h"
 
 
 //===========================================================================
-/** The base class for all OpenGL objects.
+/** The class of OpenGL Fragment Shader.
 */
-class Object {
+class FragmentShader : public Shader {
 public:
-	GLuint name;
-	static const bool m_sharable = false;
 
-	Object(const GLuint name = 0)
-		:name(name)
+	/** \brief Empty constructor.
+	*
+	* Creates an OpenGL Fragment Shader object and associates  a
+	* GLuint identifier to it. Once created, this identifier can
+	* be further accessed directly via attribute '.name'.
+	*
+	* Notice: in case of any type of error at creation time, the
+	*		  associated identifier is 0.
+	*/
+	FragmentShader()
+		: Shader(GL_FRAGMENT_SHADER)
 	{}
 
-	Object(const Object& copy) = delete; // this is to avoid copy constructor
-
-	~Object()
+	/** \brief Constructor with source code setting.
+	*
+	* Creates an OpenGL Fragment Shader object and associates  a
+	* GLuint identifier to it. Once created, this identifier can
+	* be  further accessed directly via attribute '.name'.  Sets
+	* also the source code for this shader object.
+	*
+	* Notice: in case of any type of error at creation time, the
+	*		  associated identifier is 0.
+	*
+	* \param source_code : a NULL-terminated  string  containing
+	*		the whole source code of this shader.
+	*/
+	FragmentShader(const GLchar* source_code)
+		: Shader(GL_FRAGMENT_SHADER, source_code)
 	{}
 
-	inline const bool is_ok() const {
-		return name != 0;
-	}
-};
-
-
-//===========================================================================
-/** The base class for all OpenGL objects that can be shared.
-*/
-class SharableObject : public Object {
-public:
-	static const bool m_sharable = true;
-
-	SharableObject(const GLuint name = 0)
-		:Object(name)
-	{}
-
-	~SharableObject()
+	~FragmentShader()
 	{}
 };
