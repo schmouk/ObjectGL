@@ -27,9 +27,9 @@ SOFTWARE.
 #include <string>
 #include "GL/glew.h"
 
-using namespace std;
-
 #include "shaders_program.h"
+
+using namespace std;
 
 
 //===========================================================================

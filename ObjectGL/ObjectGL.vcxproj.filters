@@ -45,6 +45,12 @@
     <ClInclude Include="include\shaders\shader_subroutines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\viewing\matrices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\viewing\vectors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\shaders\shaders.cpp">

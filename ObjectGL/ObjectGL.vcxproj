@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Program Files\OpenGL\glew-2.1.0\include;D:\Philippe\GitHub\ObjectGL\ObjectGL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external_libs\OpenGL\glew-2.1.0\include;$(ProjectDir)external_libs\eigen-3.4.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Program Files\OpenGL\glew-2.1.0\include;D:\Philippe\GitHub\ObjectGL\ObjectGL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external_libs\OpenGL\glew-2.1.0\include;$(ProjectDir)external_libs\eigen-3.4.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\OpenGL\glew-2.1.0\include;$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external_libs\OpenGL\glew-2.1.0\include;$(ProjectDir)external_libs\eigen-3.4.0</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -136,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Program Files\OpenGL\glew-2.1.0\include;D:\Philippe\GitHub\ObjectGL\ObjectGL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external_libs\OpenGL\glew-2.1.0\include;$(ProjectDir)external_libs\eigen-3.4.0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,6 +157,8 @@
     <ClInclude Include="include\shaders\tessellation_control_shader.h" />
     <ClInclude Include="include\shaders\tessellation_evaluation_shader.h" />
     <ClInclude Include="include\shaders\vertex_shader.h" />
+    <ClInclude Include="include\viewing\matrices.h" />
+    <ClInclude Include="include\viewing\vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\shaders\shaders.cpp" />
