@@ -3,7 +3,7 @@ archive
 Debug
 x64
 .vs
-tests
+tests.cpp
 
 # Prerequisites
 *.d
@@ -37,3 +37,4 @@ tests
 *.exe
 *.out
 *.app
+ObjectGL/src/tests/tests.cpp

@@ -51,6 +51,12 @@
     <ClInclude Include="include\viewing\vectors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\viewing\cameras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\viewing\positions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\shaders\shaders.cpp">

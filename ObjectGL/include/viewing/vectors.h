@@ -24,13 +24,11 @@ SOFTWARE.
 */
 
 //===========================================================================
-#include "Eigen/Dense"
-
-using namespace std;
+#include <Eigen/Dense>
 
 
 //===========================================================================
-// forward references
+// forward definitions
 template<typename TScalar> class Vec3;
 
 typedef Vec3<float>  Vec3f; //<! 3-D Vectors with float  (32-bits) components specialization.
@@ -88,7 +86,7 @@ public:
     * \param copy : a reference to the 4-D vector to copy.
     */
     Vec3<TScalar>(Vec4<TScalar>& copy)
-        : Eigen::Vector4<TScalar>(copy[0], copy[1], copy[2])
+        : Eigen::Vector4<TScalar>(copy(0), copy(1), copy(2))
     {}
 
     /** \brief Constructor (one Vec4 const reference)
@@ -97,17 +95,39 @@ public:
     * \param copy : a reference to the 4-D vector to copy.
     */
     Vec3<TScalar>(const Vec4<TScalar>& copy)
-        : Eigen::Vector4<TScalar>(copy[0], copy[1], copy[2])
+        : Eigen::Vector4<TScalar>(copy(0), copy(1), copy(2))
     {}
+
+
+    /** \brief Sets this vector components values (three TScalar args). */
+    void set(const TScalar x, const TScalar y, const TScalar z)
+    {
+        x(x); y(y); z(z);
+    }
+
+    /** \brief Sets this vector components values (one 3-D vector arg). */
+    void set(const Vec3<TScalar> &vec)
+    {
+        x(vec.x); y(vec.y); z(vec.z);
+    }
+
+    /** \brief Sets this vector components values (one 4-D vector arg). */
+    void set(const Vec4<TScalar>& vec)
+    {
+        x(vec.x); y(vec.y); z(vec.z);
+    }
+
 
     /** \brief x coordinate getter. */
     const TScalar x() { return (*this)(0); }
     /** \brief x coordinate setter. */
     const TScalar x(const TScalar val) { return (*this)(0) = val; }
+
     /** \brief y coordinate getter. */
     const TScalar y() { return (*this)(1); }
     /** \brief y coordinate setter. */
     const TScalar y(const TScalar val) { return (*this)(1) = val; }
+    
     /** \brief z coordinate getter. */
     const TScalar z() { return (*this)(2); }
     /** \brief z coordinate setter. */
@@ -155,36 +175,58 @@ public:
         : Eigen::Vector4<TScalar>(copy)
     {}
 
-    /** \brief Constructor (one Vec3 reference)
+    /** \brief Constructor (one Vec3 reference + homogeneous coordinate)
     *
-    * Sets the last homogeneous coefficient to 1.0.
     * \param copy : a reference to the 4-D vector to copy.
+    * \param w : the homogeneous coordinate. Defaults to 1.0.
     */
-    Vec4<TScalar>(Vec3<TScalar>& copy)
-        : Eigen::Vector4<TScalar>(copy[0], copy[1], copy[2], TScalar(1))
+    Vec4<TScalar>(Vec3<TScalar>& copy, const TScalar w = TScalar(1))
+        : Eigen::Vector4<TScalar>(copy(0), copy(1), copy(2), w)
     {}
 
-    /** \brief Constructor (one Vec3 const reference)
+    /** \brief Constructor (one Vec3 const reference + homogeneous coordinate)
     *
-    * Sets the last homogeneous coefficient to 1.0.
     * \param copy : a reference to the 4-D vector to copy.
+    * \param w : the homogeneous coordinate. Defaults to 1.0.
     */
-    Vec4<TScalar>(const Vec3<TScalar>& copy)
-        : Eigen::Vector4<TScalar>(copy[0], copy[1], copy[2], TScalar(1))
+    Vec4<TScalar>(const Vec3<TScalar>& copy, const TScalar w = TScalar(1))
+        : Eigen::Vector4<TScalar>(copy(0), copy(1), copy(2), w)
     {}
+
+
+    /** \brief Sets this vector components values (four TScalar args). */
+    void set(const TScalar x, const TScalar y, const TScalar z, const TScalar w = TScalar(1))
+    {
+        x(x); y(y); z(z); w(w);
+    }
+
+    /** \brief Sets this vector components values (one 3-D vector arg). */
+    void set(const Vec3<TScalar>& vec)
+    {
+        x(vec.x); y(vec.y); z(vec.z); w(TScalar(1));
+    }
+
+    /** \brief Sets this vector components values (one 4-D vector arg). */
+    void set(const Vec4<TScalar>& vec)
+    {
+        x(vec.x); y(vec.y); z(vec.z); w(vec.w);
+    }
 
     /** \brief x coordinate getter. */
     const TScalar x() { return (*this)(0); }
     /** \brief x coordinate setter. */
     const TScalar x(const TScalar val) { return (*this)(0) = val; }
+
     /** \brief y coordinate getter. */
     const TScalar y() { return (*this)(1); }
     /** \brief y coordinate setter. */
     const TScalar y(const TScalar val) { return (*this)(1) = val; }
+    
     /** \brief z coordinate getter. */
     const TScalar z() { return (*this)(2); }
     /** \brief z coordinate setter. */
     const TScalar z(const TScalar val) { return (*this)(2) = val; }
+    
     /** \brief w coordinate getter. */
     const TScalar w() { return (*this)(3); }
     /** \brief w coordinate setter. */
